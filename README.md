@@ -83,7 +83,3 @@ src/
 - `husky` + `lint-staged` are enabled
 - `pre-commit` runs Biome checks on staged files
 - Use Conventional Commits for commit messages
-
-See commit message conventions:
-
-- [Commit Message Guide](/Users/user/Desktop/review-flow/docs/commit-message-guide.md)
