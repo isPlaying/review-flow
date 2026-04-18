@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ReviewFlow Frontend
+
+ReviewFlow is a lightweight, production-style document review frontend built with Next.js.
+
+## Tech Stack
+
+- Next.js (App Router)
+- TypeScript
+- TanStack Query
+- React Hook Form
+- Zustand
+- Ant Design
+- Axios
+- pnpm
+- Biome
+- Husky
+- lint-staged
+
+## MVP Scope
+
+The current MVP focuses on:
+
+- Login
+- Document list and detail
+- PDF preview
+- Comments
+- Solid engineering practices
 
 ## Getting Started
 
-First, run the development server:
+### 1. Install dependencies
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Configure environment variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create `.env.local`:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+NEXT_PUBLIC_API_BASE_URL=https://jsonplaceholder.typicode.com
+```
 
-## Learn More
+If not provided, the app falls back to the same default URL.
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Run the app
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+pnpm dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Open [http://localhost:3000](http://localhost:3000).
 
-## Deploy on Vercel
+## Scripts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+pnpm dev         # start dev server
+pnpm build       # build for production
+pnpm start       # run production server
+pnpm lint        # run Biome checks
+pnpm lint:fix    # run Biome checks with auto-fix
+pnpm format      # format files via Biome
+pnpm typecheck   # run TypeScript type check
+pnpm check       # lint + typecheck
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project Structure
+
+```text
+src/
+  app/           # Next.js App Router pages and layouts
+  components/    # shared UI components
+  features/      # feature modules (api, hooks, components, types)
+  lib/           # shared utilities and axios instance
+  providers/     # app-level providers
+  store/         # zustand stores (UI-only state)
+  types/         # shared TypeScript types
+```
+
+## Engineering Workflow
+
+- `husky` + `lint-staged` are enabled
+- `pre-commit` runs Biome checks on staged files
+- Use Conventional Commits for commit messages
+
+See commit message conventions:
+
+- [Commit Message Guide](/Users/user/Desktop/review-flow/docs/commit-message-guide.md)
