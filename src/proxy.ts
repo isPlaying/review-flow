@@ -4,7 +4,6 @@ import { NextResponse } from "next/server";
 import { ACCESS_TOKEN_KEY } from "@/lib/auth";
 
 const PUBLIC_ROUTES = new Set(["/login"]);
-const LOG_PREFIX = "[proxy]";
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
