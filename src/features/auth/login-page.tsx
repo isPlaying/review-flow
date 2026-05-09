@@ -46,7 +46,7 @@ export function LoginPage() {
         data: {
           username: values.username,
           password: values.password,
-        } as Record<string, unknown>,
+        },
       });
 
       messageApi.success(`Welcome back, ${values.username}`);
