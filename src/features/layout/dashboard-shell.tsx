@@ -17,6 +17,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { type PropsWithChildren, useState } from "react";
 
 import { useAuthControllerLogout } from "@/api/generated/reviewflow";
+import type { ApiError } from "@/lib/http";
 
 const { Header, Sider, Content } = Layout;
 
@@ -50,33 +51,33 @@ const menuItems = [
   },
 ];
 
-const userMenuItems = [
-  {
-    key: "profile",
-    icon: <UserOutlined />,
-    label: "Profile",
-  },
-  {
-    key: "settings",
-    icon: <SettingOutlined />,
-    label: "Settings",
-  },
-  {
-    type: "divider" as const,
-  },
-  {
-    key: "signout",
-    label: "Sign out",
-    danger: true,
-  },
-];
-
 export function DashboardShell({ children }: PropsWithChildren) {
   const pathname = usePathname();
   const router = useRouter();
   const [messageApi, contextHolder] = message.useMessage();
   const logoutMutation = useAuthControllerLogout();
   const [collapsed, setCollapsed] = useState(false);
+  const userMenuItems = [
+    {
+      key: "profile",
+      icon: <UserOutlined />,
+      label: "Profile",
+    },
+    {
+      key: "settings",
+      icon: <SettingOutlined />,
+      label: "Settings",
+    },
+    {
+      type: "divider" as const,
+    },
+    {
+      key: "signout",
+      label: logoutMutation.isPending ? "Signing out..." : "Sign out",
+      danger: true,
+      disabled: logoutMutation.isPending,
+    },
+  ];
 
   const selectedKey = [...menuItems]
     .sort((a, b) => b.key.length - a.key.length)
@@ -143,8 +144,14 @@ export function DashboardShell({ children }: PropsWithChildren) {
                 if (key === "signout") {
                   try {
                     await logoutMutation.mutateAsync();
+                    messageApi.success("Signed out.");
                     router.replace("/login");
-                  } catch {
+                  } catch (error) {
+                    const apiError = error as Partial<ApiError>;
+                    if (apiError.status === 401) {
+                      router.replace("/login");
+                      return;
+                    }
                     messageApi.error("Sign out failed. Please try again.");
                   }
                 }
