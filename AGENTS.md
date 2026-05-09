@@ -90,6 +90,10 @@ For each domain feature, prefer this shape:
 - Styling strategy: CSS Modules + `src/app/globals.css`
 - Keep visual style simple, consistent, and business-oriented
 - Prefer accessible defaults (`aria-*`, semantic structure, keyboard flows)
+- Ant Design usage must follow the version declared in `package.json` (currently `antd@6.x`)
+- Do not use deprecated/legacy Ant Design props or APIs from older versions
+- Before introducing or modifying Ant Design components, verify APIs against the current official docs for the installed version
+- If deprecated usage is found, migrate it immediately as part of the same change
 
 ## Do
 

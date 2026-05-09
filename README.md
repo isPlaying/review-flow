@@ -63,6 +63,10 @@ pnpm lint:fix    # run Biome checks with auto-fix
 pnpm format      # format files via Biome
 pnpm typecheck   # run TypeScript type check
 pnpm check       # lint + typecheck
+pnpm antd:migrate # run Ant Design migration assistant
+pnpm antd:mcp    # start Ant Design MCP server
+pnpm antd:guard  # project-level guard for common deprecated AntD patterns
+pnpm check:antd  # run antd guard + lint + typecheck
 ```
 
 ## Project Structure
@@ -83,3 +87,12 @@ src/
 - `husky` + `lint-staged` are enabled
 - `pre-commit` runs Biome checks on staged files
 - Use Conventional Commits for commit messages
+
+## Ant Design AI Tooling
+
+- `@ant-design/cli` is installed and wired into project scripts.
+- `.mcp.json` is included to expose Ant Design MCP in MCP-compatible clients.
+- MCP server command: `pnpm antd:mcp`
+
+Note:
+- Use `pnpm antd:guard` / `pnpm check:antd` as the stable way to enforce Ant Design compatibility in this project.

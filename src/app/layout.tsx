@@ -1,15 +1,9 @@
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
 
 import { AppProvider } from "@/providers/app-provider";
 
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Next.js Frontend Starter",
@@ -22,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN" className={geistSans.variable}>
+    <html lang="zh-CN" suppressHydrationWarning>
       <body>
         <AntdRegistry>
           <AppProvider>{children}</AppProvider>
