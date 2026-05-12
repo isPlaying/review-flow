@@ -99,13 +99,25 @@ export function DashboardShell({ children }: PropsWithChildren) {
         }}
       >
         <Flex vertical gap={24} style={{ width: "100%", padding: "20px 16px" }}>
-          <Flex align="center" gap={8}>
-            <Avatar
-              shape="square"
-              icon={<FileSearchOutlined />}
-              style={{ background: "#1677ff" }}
+          <Flex align="center" justify={collapsed ? "center" : "space-between"} gap={8}>
+            {!collapsed ? (
+              <>
+                <Avatar
+                  shape="square"
+                  icon={<FileSearchOutlined />}
+                  style={{ background: "#1677ff" }}
+                />
+                <Typography.Text strong style={{ flex: 1 }}>
+                  ReviewFlow
+                </Typography.Text>
+              </>
+            ) : null}
+            <Button
+              type="text"
+              size="small"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed((value) => !value)}
             />
-            {!collapsed ? <Typography.Text strong>ReviewFlow</Typography.Text> : null}
           </Flex>
           <Menu
             mode="inline"
@@ -132,11 +144,7 @@ export function DashboardShell({ children }: PropsWithChildren) {
             zIndex: 2,
           }}
         >
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed((value) => !value)}
-          />
+          <div />
           <Dropdown
             menu={{
               items: userMenuItems,

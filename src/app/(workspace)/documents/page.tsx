@@ -1,6 +1,7 @@
 "use client";
 
-import { Card, Flex, Table, Tag, Typography } from "antd";
+import { Button, Card, Flex, Table, Tag, Typography } from "antd";
+import Link from "next/link";
 
 type DocumentItem = {
   key: string;
@@ -40,6 +41,18 @@ export default function DocumentsPage() {
               dataIndex: "status",
               width: 140,
               render: (status: DocumentItem["status"]) => <Tag>{status}</Tag>,
+            },
+            {
+              title: "Action",
+              key: "action",
+              width: 120,
+              render: (_, record: DocumentItem) => (
+                <Link href={`/reviews/${record.id}`} prefetch={false}>
+                  <Button type="link" size="small">
+                    Review
+                  </Button>
+                </Link>
+              ),
             },
           ]}
         />

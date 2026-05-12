@@ -19,7 +19,7 @@ let unauthorizedHandler: UnauthorizedHandler | null = null;
 let refreshPromise: Promise<void> | null = null;
 
 export const http = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000/api",
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000",
   timeout: 10_000,
   // Cookie-only auth mode: backend sets HttpOnly cookies, frontend never stores tokens.
   withCredentials: true,
